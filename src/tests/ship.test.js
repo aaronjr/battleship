@@ -26,7 +26,7 @@ test('hit count updates on hit', () => {
   expect(ship.hitCount()).toBe(3)
 });
 
-test('checks if ship afloat', () => {
+test('checks if ship is afloat', () => {
   const ship = newShip(1);
   expect(ship.alive()).toBe(true)
   ship.hit()
