@@ -1,13 +1,15 @@
 /* eslint-disable no-return-assign */
 const newShip = (length) => {
-  let count = 0
+  let count = 0;
 
-  const getLength = () => length
-  const hit = () => count += 1
-  const hitCount = () => count
-  const alive = () => count < length
+  const getLength = () => length;
+  const hit = () => count += 1;
+  const hitCount = () => count;
+  const alive = () => count < length;
 
-  return { getLength, hit, hitCount, alive };
+  return {
+    getLength, hit, hitCount, alive,
+  };
 };
 
-export default newShip
+export default newShip;
