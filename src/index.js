@@ -5,11 +5,15 @@ import gameboard from './gameboard';
 
 const board = gameboard(5);
 const ship = newShip(3);
-// ship.getLength()
+ship.getLength()
 
-board.placeShips('a', 1, ship);
-board.placeShips('b', 2, ship);
-
+board.placeShips('d', 1, ship);
+board.placeShips('e', 1, ship);
 console.log(board.printBoard());
+console.log(board.checkAlive());
 
-board.recieveHit('a6');
+board.recieveHit('e1');
+board.recieveHit('e2');
+console.log(board.checkAlive());
+board.recieveHit('e3');
+console.log(board.checkAlive());
