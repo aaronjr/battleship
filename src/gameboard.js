@@ -73,12 +73,12 @@ const gameboard = () => {
       if (ship.alive() === true && hit(location) === true) {
         // hit ship
         ship.hit();
-        // update hit to array
+        // update board array of hit locations
         updateHit(location);
+        console.log(hitLocations);
         console.log('hit');
         return true;
       }
-      console.log(hitLocations);
       console.log('already been here');
       return false;
     }
@@ -90,12 +90,11 @@ const gameboard = () => {
 
   const checkAlive = () => {
     const alive = ships.filter((ship) => ship.alive());
-    console.log(alive.length);
     return !!alive.length;
   };
 
   return {
-    placeShips, printBoard, recieveHit, checkAlive, hitLocations, ships,
+    placeShips, printBoard, recieveHit, checkAlive, hitLocations,
   };
 };
 

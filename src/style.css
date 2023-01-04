@@ -1,0 +1,31 @@
+body{
+ display: grid;
+ place-items: center;
+ width: 100vw;
+ height: 100vh;
+}
+
+.container{
+ display: flex;
+ align-items: center;
+ justify-content: space-evenly;
+ width: 100%;
+}
+
+.boardOne,
+.boardTwo {
+  height: 490px;
+  width: 490px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.box{
+  height: 60px;
+  width: 60px;
+  border: solid black 1px;
+}
+
+.colour{
+  background-color: blcak;
+}
