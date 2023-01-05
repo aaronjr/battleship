@@ -20,42 +20,56 @@ const Player = () => {
   const computerGuess = () => {
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
     const { length } = letters;
-
+    // return the coords, returned by random function
     return random(letters, length);
   };
 
   // computer can make a random guess or side shot if last was succesful
   const computerAttack = (board) => {
+    // if last shot was wrong, make new guess
     if (lastShot.hit === false) {
       // create new guess for computer
       const guess = computerGuess();
+      // save into a function to later compare
       const attempt = board.recieveHit(guess);
       if (!attempt) {
+        // if shot has already been taken, recursively guess again
         lastShot.location = guess;
         lastShot.hit = false;
         return computerAttack(board);
+        // if missed update lastShot correctly
       } if (attempt === 'miss') {
         lastShot.location = guess;
         lastShot.hit = false;
+        // if hit update lastShot correctly
       } else {
         lastShot.location = guess;
         lastShot.hit = true;
       }
+      // make sure next go won't overflow the board
     } else if (lastShot.location[1] < 6) {
+      // increase number coord by 1
       let increase = parseInt(lastShot.location[1], 10);
       const letter = lastShot.location[0];
       increase += 1;
+      // save back into location
       lastShot.location = `${letter}${increase}`;
+      // save call to function in a variable to later compare
       const attempt = board.recieveHit(lastShot.location);
+      // if shot already taken
       if (!attempt) {
         lastShot.hit = false;
+        // new shot, but random
         computerAttack(board);
       } else if (attempt === 'miss') {
+        // if missed shot, update lastshot to false
         lastShot.hit = false;
       } else {
+        // if hit update last shot to hit and location already changed
         lastShot.hit = true;
       }
     } else {
+      // if last shot was the last square of a row, make random shot
       lastShot.hit = false;
       computerAttack(board);
     }

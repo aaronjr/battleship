@@ -5,14 +5,13 @@
 const gameboard = () => {
   // 7 x 7 grid
   const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
-  // array to log current hits
-  const hitLocations = [];
   // empty board array
   const board = {};
   // list of ships on board
   const ships = [];
 
   // loop through and create 7 x 7 board - a0, a1 ... g6
+  // set keys and their values
   for (const letter in letters) {
     for (const number in letters) {
       const start = letters[letter];
@@ -50,46 +49,48 @@ const gameboard = () => {
           board[l + i].ship = ship;
         }
       } else {
+        // if space taken return false
         return false;
       }
     } else {
+      // if ship will overflow board
       return false;
     }
     // if ship layed succesfully, return true
     return true;
   };
 
-  // print board
+  // returns the board
   const printBoard = () => board;
 
   // add hit to board
   const recieveHit = (location) => {
     // check for duplicate shot
-    if (board[location].history === false) {
+    const local = board[location];
+    if (local.history === false) {
       // if there is a ship here
       // eslint-disable-next-line prefer-destructuring, dot-notation
-      const local = board[location];
       if (local.ship) {
         // check the ship is alive and user hasnt been here yet
-        if (local.ship.alive() === true) {
-          // hit ship
-          local.ship.hit();
-          // update board array of hit locations
-          board[location].history = true;
-          board[location].hit = true;
-          return 'hit';
-        }
-      } else {
-        board[location].history = true;
-        return 'miss';
+        // hit ship
+        local.ship.hit();
+        // update board of hit locations
+        local.history = true;
+        local.hit = true;
+        return 'hit';
       }
-    } else {
-      return false;
+      // if no hit, update the board as a missed hit
+      local.history = true;
+      return 'miss';
     }
+    return false;
   };
 
+  // check if this board still alive
   const checkAlive = () => {
+    // filter all ships that are still alive
     const alive = ships.filter((ship) => ship.alive());
+    // return boolean of how many ships are alive
     return !!alive.length;
   };
 
@@ -98,7 +99,6 @@ const gameboard = () => {
     printBoard,
     recieveHit,
     checkAlive,
-    hitLocations,
   };
 };
 

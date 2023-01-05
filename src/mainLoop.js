@@ -46,18 +46,21 @@ const mainLoop = () => {
     placeCShips(newShip(number));
   });
 
+  // set up behind boards
   const body = document.querySelector('body');
   const container = document.createElement('div');
   container.className = 'container';
   body.append(container);
 
+  // set up boards
   const boardOne = document.createElement('div');
   const boardTwo = document.createElement('div');
-
   boardOne.className = 'boardOne';
   boardTwo.className = 'boardTwo';
 
   // loop through and create 7 x 7 board - a0, a1 ... g6
+  // create boxes for each board with different names
+  // so DOM can be updated accuretly
   for (const letter in letters) {
     for (const number in letters) {
       const start = letters[letter];
@@ -77,14 +80,17 @@ const mainLoop = () => {
       boardTwo.append(box2);
     }
   }
+  // add boards to background
   container.append(boardOne);
   container.append(boardTwo);
 
+  // get the boards of each player
   const compDOM = compBoard.printBoard();
   const playDOM = playerBoard.printBoard();
 
-  function updateComputerBoardDOM() {
-    // this is map for computers pieces
+  // loop through the board and update the colours accorinding to data
+  // using 'WHO="?"' to select correctly
+  const updateComputerBoardDOM = () => {
     for (const item in compDOM) {
       if (compDOM[item].history === true) {
         const a = document.querySelector(`[target="${compDOM[item].location}"][who="C"]`);
@@ -95,9 +101,10 @@ const mainLoop = () => {
         a.style.backgroundColor = 'red';
       }
     }
-  }
+  };
 
-  function updatePlayerBoardDOM() {
+  // loop through the board and update the colours accorinding to data
+  const updatePlayerBoardDOM = () => {
     for (const item in playDOM) {
       if (playDOM[item].ship) {
         const a = document.querySelector(`[target="${item}"][who="P"]`);
@@ -112,16 +119,19 @@ const mainLoop = () => {
         a.style.backgroundColor = 'red';
       }
     }
-  }
+  };
 
-  function playGame() {
+  const playGame = () => {
     // change player from last go
     changeTurn();
     const player = lastGo;
+    // update latest board
+    updatePlayerBoardDOM();
+    updateComputerBoardDOM();
 
     // play computers choice and update accordingly
+    // use recusion to playGame if game not over
     if (player === 'computer') {
-      updatePlayerBoardDOM();
       if (playerBoard.checkAlive()) {
         computer.computerAttack(playerBoard);
         updatePlayerBoardDOM();
@@ -133,9 +143,10 @@ const mainLoop = () => {
           return true;
         }
       }
+
       // players go and update accordingly
+      // use recusion to playGame if game not over
     } else if (player === 'playerOne') {
-      updateComputerBoardDOM();
       if (compBoard.checkAlive()) {
         playerOne.computerAttack(compBoard);
         updateComputerBoardDOM();
@@ -149,9 +160,10 @@ const mainLoop = () => {
       }
     }
     return true;
-  }
+  };
 
-  playGame();
+  // add button for start game
+  return { playGame };
 };
 
 export default mainLoop;
