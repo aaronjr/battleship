@@ -126,7 +126,7 @@ const mainLoop = () => {
         computer.computerAttack(playerBoard);
         updateComputerBoardDOM();
         if ((playerBoard.checkAlive())) {
-          setTimeout(function(){playGame()}, 500);
+          setTimeout(() => { playGame(); }, 500);
         } else {
           console.log('Computer won');
           return true;
@@ -139,7 +139,7 @@ const mainLoop = () => {
         playerOne.computerAttack(compBoard);
         updatePlayerBoardDOM();
         if ((compBoard.checkAlive())) {
-          setTimeout(function(){playGame()}, 500);
+          setTimeout(() => { playGame(); }, 500);
         } else {
           console.log('playerOne won');
           return true;
