@@ -17,14 +17,16 @@ const gameboard = () => {
     for (const number in letters) {
       const start = letters[letter];
       const end = number;
-      board[start + end] = null;
+      board[start + end] = { ship: null };
+      board[start + end] = { history: null };
+      board[start + end] = { hit: null };
     }
   }
 
   // loop through coordinates (a1 - a5) and check all are empty
   const checkNull = (l, n, length) => {
-    for (let i = n; (i - n) < length; i += 1) {
-      if (board[l + i] != null) {
+    for (let i = n; i - n < length; i += 1) {
+      if (board[l + i].ship != null) {
         return false;
       }
     }
@@ -40,9 +42,9 @@ const gameboard = () => {
       // check all spots for the ship will occupy are empty
       if (checkNull(l, n, length)) {
         ships.push(ship);
-        for (let i = n; (i - n) < length; i += 1) {
+        for (let i = n; i - n < length; i += 1) {
           // if clear add ship to each square
-          board[l + i] = ship;
+          board[l + i].ship = ship;
         }
       } else {
         return false;
@@ -58,34 +60,39 @@ const gameboard = () => {
   const printBoard = () => board;
 
   // check an ship hasn't already been hit
-  const hit = (location) => (!hitLocations.includes(location));
+  const hit = (location) => !hitLocations.includes(location);
 
   // add to array to log all hits.
   const updateHit = (location) => hitLocations.push(location);
 
   // add hit to board
   const recieveHit = (location) => {
-    // if there is a ship here
-    if (board[location] !== null) {
-      // save as a ship
-      const ship = board[location];
-      // check the ship is alive and user hasnt been here yet
-      if (ship.alive() === true && hit(location) === true) {
-        // hit ship
-        ship.hit();
-        // update board array of hit locations
+    // check for duplicate shot
+    if (hit(location) === true) {
+      // if there is a ship here
+      // eslint-disable-next-line prefer-destructuring, dot-notation
+      const ship = board[location]['ship'];
+      // this ship should be a ship but its undefined
+      console.log(ship);
+      if (ship !== null) {
+        // check the ship is alive and user hasnt been here yet
+        if (ship.alive() === true) {
+          // hit ship
+          ship.hit();
+          // update board array of hit locations
+          updateHit(location);
+          console.log(location, 'hit');
+          return 'hit';
+        }
+      } else {
         updateHit(location);
-        console.log(hitLocations);
-        console.log('hit');
-        return true;
+        console.log(location, 'miss');
+        return 'miss';
       }
-      console.log('already been here');
+    } else {
+      console.log(location, 'taken');
       return false;
     }
-    // ive missed, still add hit to array
-    updateHit(location);
-    console.log('missed ship, shot logged');
-    return true;
   };
 
   const checkAlive = () => {
@@ -94,7 +101,11 @@ const gameboard = () => {
   };
 
   return {
-    placeShips, printBoard, recieveHit, checkAlive, hitLocations,
+    placeShips,
+    printBoard,
+    recieveHit,
+    checkAlive,
+    hitLocations,
   };
 };
 

@@ -44,7 +44,13 @@ const mainLoop = () => {
     placePShips(newShip(number));
     placeCShips(newShip(number));
   });
-
+  console.log(compBoard.printBoard());
+  playerOne.computerAttack(compBoard);
+  playerOne.computerAttack(compBoard);
+  playerOne.computerAttack(compBoard);
+  playerOne.computerAttack(compBoard);
+  playerOne.computerAttack(compBoard);
+  playerOne.computerAttack(compBoard);
   playerOne.computerAttack(compBoard);
   playerOne.computerAttack(compBoard);
   playerOne.computerAttack(compBoard);
@@ -101,7 +107,7 @@ const mainLoop = () => {
   }
 
   for (const item in playDOM) {
-    if (playDOM[item] !== null) {
+    if (playDOM[item].ship !== null) {
       const a = document.querySelector(`[target="${item}"][who="P"]`);
       a.style.backgroundColor = 'black';
     }
