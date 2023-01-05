@@ -17,9 +17,12 @@ const gameboard = () => {
     for (const number in letters) {
       const start = letters[letter];
       const end = number;
-      board[start + end] = { ship: null };
-      board[start + end] = { history: null };
-      board[start + end] = { hit: null };
+      board[start + end] = {
+        ship: null,
+        history: false,
+        hit: false,
+        location: start + end,
+      };
     }
   }
 
@@ -59,31 +62,26 @@ const gameboard = () => {
   // print board
   const printBoard = () => board;
 
-  // check an ship hasn't already been hit
-  const hit = (location) => !hitLocations.includes(location);
-
-  // add to array to log all hits.
-  const updateHit = (location) => hitLocations.push(location);
-
   // add hit to board
   const recieveHit = (location) => {
     // check for duplicate shot
-    if (hit(location) === true) {
+    if (board[location].history === false) {
       // if there is a ship here
       // eslint-disable-next-line prefer-destructuring, dot-notation
       const local = board[location];
-      if (localStorage.ship) {
+      if (local.ship) {
         // check the ship is alive and user hasnt been here yet
         if (local.ship.alive() === true) {
           // hit ship
           local.ship.hit();
           // update board array of hit locations
-          updateHit(location);
+          board[location].history = true;
+          board[location].hit = true;
           console.log(location, 'hit');
           return 'hit';
         }
       } else {
-        updateHit(location);
+        board[location].history = true;
         console.log(location, 'miss');
         return 'miss';
       }

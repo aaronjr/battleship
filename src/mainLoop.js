@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-undef */
 /* eslint-disable no-restricted-syntax */
@@ -12,8 +13,8 @@ const mainLoop = () => {
   const computer = Player();
 
   // initialise to computer, so player goes first
-  let lastGo = computer;
-  const changeTurn = () => lastGo = lastGo === computer ? playerOne : computer;
+  let lastGo = 'computer';
+  const changeTurn = () => lastGo = lastGo === 'computer' ? 'playerOne' : 'computer';
 
   // create two boards
   const playerBoard = gameboard();
@@ -44,26 +45,8 @@ const mainLoop = () => {
     placePShips(newShip(number));
     placeCShips(newShip(number));
   });
-  console.log(compBoard.printBoard());
-  playerOne.computerAttack(compBoard);
-  playerOne.computerAttack(compBoard);
-  playerOne.computerAttack(compBoard);
-  playerOne.computerAttack(compBoard);
-  playerOne.computerAttack(compBoard);
-  playerOne.computerAttack(compBoard);
-  playerOne.computerAttack(compBoard);
-  playerOne.computerAttack(compBoard);
-  playerOne.computerAttack(compBoard);
-
-  // set first go to player one
-  changeTurn();
-
-  //
-  // above here is game setup
-  //
 
   const body = document.querySelector('body');
-  console.log(body);
   const container = document.createElement('div');
   container.className = 'container';
   body.append(container);
@@ -97,21 +80,76 @@ const mainLoop = () => {
   container.append(boardOne);
   container.append(boardTwo);
 
-  const compDOM = compBoard.hitLocations;
+  const compDOM = compBoard.printBoard();
   const playDOM = playerBoard.printBoard();
 
-  // this is map for computers pieces
-  for (const item in compDOM) {
-    const a = document.querySelector(`[target="${compDOM[item]}"][who="C"]`);
-    a.style.backgroundColor = 'red';
-  }
-
-  for (const item in playDOM) {
-    if (playDOM[item].ship) {
-      const a = document.querySelector(`[target="${item}"][who="P"]`);
-      a.style.backgroundColor = 'black';
+  function updateComputerBoardDOM() {
+    // this is map for computers pieces
+    for (const item in compDOM) {
+      if (compDOM[item].history === true) {
+        const a = document.querySelector(`[target="${compDOM[item].location}"][who="C"]`);
+        a.style.backgroundColor = 'green';
+      }
+      if (compDOM[item].hit === true) {
+        const a = document.querySelector(`[target="${compDOM[item].location}"][who="C"]`);
+        a.style.backgroundColor = 'red';
+      }
     }
   }
+
+  function updatePlayerBoardDOM() {
+    for (const item in playDOM) {
+      if (playDOM[item].ship) {
+        const a = document.querySelector(`[target="${item}"][who="P"]`);
+        a.style.backgroundColor = 'black';
+      }
+      if (playDOM[item].history === true) {
+        const a = document.querySelector(`[target="${playDOM[item].location}"][who="P"]`);
+        a.style.backgroundColor = 'green';
+      }
+      if (playDOM[item].hit === true) {
+        const a = document.querySelector(`[target="${playDOM[item].location}"][who="P"]`);
+        a.style.backgroundColor = 'red';
+      }
+    }
+  }
+
+  function playGame() {
+    // change player from last go
+    changeTurn();
+    const player = lastGo;
+
+    // play computers choice and update accordingly
+    if (player === 'computer') {
+      updateComputerBoardDOM();
+      if (playerBoard.checkAlive()) {
+        computer.computerAttack(playerBoard);
+        updateComputerBoardDOM();
+        if ((playerBoard.checkAlive())) {
+          setTimeout(function(){playGame()}, 500);
+        } else {
+          console.log('Computer won');
+          return true;
+        }
+      }
+      // players go and update accordingly
+    } else if (player === 'playerOne') {
+      updatePlayerBoardDOM();
+      if (compBoard.checkAlive()) {
+        playerOne.computerAttack(compBoard);
+        updatePlayerBoardDOM();
+        if ((compBoard.checkAlive())) {
+          setTimeout(function(){playGame()}, 500);
+        } else {
+          console.log('playerOne won');
+          return true;
+        }
+      }
+    }
+    return true;
+  }
+
+  playGame();
 };
 
 export default mainLoop;
