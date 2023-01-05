@@ -121,26 +121,28 @@ const mainLoop = () => {
 
     // play computers choice and update accordingly
     if (player === 'computer') {
-      updateComputerBoardDOM();
+      updatePlayerBoardDOM();
       if (playerBoard.checkAlive()) {
         computer.computerAttack(playerBoard);
-        updateComputerBoardDOM();
+        updatePlayerBoardDOM();
         if ((playerBoard.checkAlive())) {
           setTimeout(() => { playGame(); }, 500);
         } else {
+          updatePlayerBoardDOM();
           console.log('Computer won');
           return true;
         }
       }
       // players go and update accordingly
     } else if (player === 'playerOne') {
-      updatePlayerBoardDOM();
+      updateComputerBoardDOM();
       if (compBoard.checkAlive()) {
         playerOne.computerAttack(compBoard);
-        updatePlayerBoardDOM();
+        updateComputerBoardDOM();
         if ((compBoard.checkAlive())) {
           setTimeout(() => { playGame(); }, 500);
         } else {
+          updateComputerBoardDOM();
           console.log('playerOne won');
           return true;
         }

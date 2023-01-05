@@ -77,16 +77,13 @@ const gameboard = () => {
           // update board array of hit locations
           board[location].history = true;
           board[location].hit = true;
-          console.log(location, 'hit');
           return 'hit';
         }
       } else {
         board[location].history = true;
-        console.log(location, 'miss');
         return 'miss';
       }
     } else {
-      console.log(location, 'taken');
       return false;
     }
   };

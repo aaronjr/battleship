@@ -46,7 +46,6 @@ const Player = () => {
       const letter = lastShot.location[0];
       increase += 1;
       lastShot.location = `${letter}${increase}`;
-      console.log(lastShot);
       const attempt = board.recieveHit(lastShot.location);
       if (!attempt) {
         lastShot.hit = false;
@@ -62,7 +61,7 @@ const Player = () => {
     }
   };
 
-  return { computerAttack };
+  return { computerGuess, computerAttack };
 };
 
 export default Player;
