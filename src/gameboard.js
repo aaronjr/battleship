@@ -71,14 +71,12 @@ const gameboard = () => {
     if (hit(location) === true) {
       // if there is a ship here
       // eslint-disable-next-line prefer-destructuring, dot-notation
-      const ship = board[location]['ship'];
-      // this ship should be a ship but its undefined
-      console.log(ship);
-      if (ship !== null) {
+      const local = board[location];
+      if (localStorage.ship) {
         // check the ship is alive and user hasnt been here yet
-        if (ship.alive() === true) {
+        if (local.ship.alive() === true) {
           // hit ship
-          ship.hit();
+          local.ship.hit();
           // update board array of hit locations
           updateHit(location);
           console.log(location, 'hit');

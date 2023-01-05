@@ -107,7 +107,7 @@ const mainLoop = () => {
   }
 
   for (const item in playDOM) {
-    if (playDOM[item].ship !== null) {
+    if (playDOM[item].ship) {
       const a = document.querySelector(`[target="${item}"][who="P"]`);
       a.style.backgroundColor = 'black';
     }
