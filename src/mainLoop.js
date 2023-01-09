@@ -147,7 +147,6 @@ const Practice = () => {
       // play computer guess
       // will use recusion to find an acceptable shot
       computer.computerAttack(playerBoard);
-      // setTimeout(updatePlayerBoardDOM, 1500);
       updatePlayerBoardDOM();
       changeTurn();
       // if player board is finished then return
@@ -161,18 +160,26 @@ const Practice = () => {
     // if either is dead
     // offer to start again
   };
+  const loadBoard = () => {
+    // load loaded board s to screen
+    updateComputerBoardDOM();
+    updatePlayerBoardDOM();
+  };
 
-  updateComputerBoardDOM();
-  updatePlayerBoardDOM();
-
+  // add event listeners to the correct squares
   const boxes = document.querySelectorAll('[who="C"]');
   boxes.forEach((box) => {
     box.addEventListener('click', () => {
-      if (!gameOver && turn === 'player') {
+      const hit = box.style.backgroundColor === 'red';
+      const miss = box.style.backgroundColor === 'green';
+      const available = !!(miss === false && hit === false);
+      if (!gameOver && turn === 'player' && available === true) {
         playGame(box.attributes.target.value);
       }
     });
   });
+
+  return { loadBoard };
 };
 
 export default Practice;
