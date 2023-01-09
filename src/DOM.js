@@ -6,7 +6,7 @@ import updatePlayerBoardDOM from './updatePlayerBoardDOM';
 
 const createDOM = () => {
   const create = () => {
-    // set up behind boards
+    // set up of main body
     const body = document.querySelector('body');
     const banner = document.createElement('div');
     banner.className += 'banner';
