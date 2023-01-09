@@ -11,12 +11,17 @@ const createDOM = () => {
     const banner = document.createElement('div');
     const footer = document.createElement('div');
     const container = document.createElement('div');
+    const ships = document.createElement('div');
+
+    ships.className += 'shipHolder';
     banner.className += 'banner';
     container.className += 'container';
     footer.className += 'footer';
+
     const button = document.createElement('button');
     button.className += 'start';
     button.textContent = 'START';
+
     footer.append(button);
     body.append(banner);
     body.append(container);
@@ -55,6 +60,7 @@ const createDOM = () => {
     // add boards to background
     container.append(boardOne);
     container.append(boardTwo);
+    container.append(ships);
   };
 
   const loadDOM = () => {

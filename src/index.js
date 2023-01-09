@@ -1,13 +1,11 @@
-/* eslint-disable import/named */
-/* eslint-disable no-unused-vars */
 import './style.css';
 import { main, create } from './mainLoop';
 // import Icon from './icon.png';
 
-main();
-
+const mainGame = main();
 const button = document.querySelector('.start');
 button.addEventListener('click', () => {
   create.loadDOM();
+  mainGame.start();
   button.style.display = 'none';
 });

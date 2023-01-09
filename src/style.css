@@ -34,7 +34,7 @@ body{
 .boardOne,
 .boardTwo {
   aspect-ratio: 1/1;
-  width: 35%;
+  width: 30%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   place-items: center;
@@ -58,4 +58,10 @@ body{
   border: 2px solid black;
   background-color: white;
   font-weight: 600;
+}
+
+.shipHolder{
+  height: calc( (100vw / 100 * 30) - 4px );
+  width: 10%;
+  border: solid 1px black;
 }

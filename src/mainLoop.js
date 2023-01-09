@@ -51,21 +51,23 @@ export const main = () => {
       }
       changeTurn();
     }
-    // if either is dead
-    // offer to start again
   };
 
-  // add event listeners to the correct squares
-  // game plays on user input - auto computer shot
-  const boxes = document.querySelectorAll('[who="C"]');
-  boxes.forEach((box) => {
-    box.addEventListener('click', () => {
-      const hit = box.style.backgroundColor === 'red';
-      const miss = box.style.backgroundColor === 'green';
-      const available = !!(miss === false && hit === false);
-      if (!gameOver && turn === 'player' && available === true) {
-        playGame(box.attributes.target.value);
-      }
+  const start = () => {
+    // add event listeners to the correct squares
+    // game plays on user input - auto computer shot
+    const boxes = document.querySelectorAll('[who="C"]');
+    boxes.forEach((box) => {
+      box.addEventListener('click', () => {
+        const hit = box.style.backgroundColor === 'red';
+        const miss = box.style.backgroundColor === 'green';
+        const available = !!(miss === false && hit === false);
+        if (!gameOver && turn === 'player' && available === true) {
+          playGame(box.attributes.target.value);
+        }
+      });
     });
-  });
+  };
+
+  return { start };
 };
