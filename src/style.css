@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
 *{
   margin: 0px;
@@ -25,6 +25,12 @@ body{
  width: 100%;
 }
 
+.footer{
+  display: grid;
+  place-items: center;
+  height: 20%;
+}
+
 .boardOne,
 .boardTwo {
   aspect-ratio: 1/1;
@@ -42,4 +48,14 @@ body{
 
 .colour{
   background-color: blcak;
+}
+
+.start,
+.end{
+  height: 50px;
+  width: 150px;
+  border-radius: .5rem;
+  border: 2px solid black;
+  background-color: white;
+  font-weight: 600;
 }

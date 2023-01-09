@@ -1,6 +1,13 @@
+/* eslint-disable import/named */
 /* eslint-disable no-unused-vars */
 import './style.css';
-import mainLoop from './mainLoop';
+import { main, create } from './mainLoop';
 // import Icon from './icon.png';
 
-mainLoop();
+main();
+
+const button = document.querySelector('.start');
+button.addEventListener('click', () => {
+  create.loadDOM();
+  button.style.display = 'none';
+});

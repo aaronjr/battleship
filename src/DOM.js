@@ -9,11 +9,18 @@ const createDOM = () => {
     // set up of main body
     const body = document.querySelector('body');
     const banner = document.createElement('div');
-    banner.className += 'banner';
+    const footer = document.createElement('div');
     const container = document.createElement('div');
+    banner.className += 'banner';
     container.className += 'container';
+    footer.className += 'footer';
+    const button = document.createElement('button');
+    button.className += 'start';
+    button.textContent = 'START';
+    footer.append(button);
     body.append(banner);
     body.append(container);
+    body.append(footer);
 
     // set up boards
     const boardOne = document.createElement('div');
@@ -56,7 +63,18 @@ const createDOM = () => {
     updatePlayerBoardDOM();
   };
 
-  return { create, loadDOM };
+  const again = () => {
+    const button = document.querySelector('.start');
+    button.className = 'end';
+    button.style.display = 'block';
+    button.textContent = 'Play again?';
+    button.addEventListener('click', () => {
+      window.location.reload();
+      return false;
+    });
+  };
+
+  return { create, loadDOM, again };
 };
 
 export default createDOM;

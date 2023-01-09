@@ -1,8 +1,3 @@
-/* eslint-disable no-loop-func */
-/* eslint-disable no-alert */
-/* eslint-disable guard-for-in */
-/* eslint-disable no-undef */
-/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-return-assign */
 
 import {
@@ -10,17 +5,17 @@ import {
 } from './setup';
 
 import createDOM from './DOM';
+// create DOM export to use in index.js
+export const create = createDOM();
 
-const main = () => {
+export const main = () => {
   // game control
   let gameOver = false;
   let turn = 'player';
   const changeTurn = () => turn = turn === 'player' ? 'computer' : 'player';
 
-  // create DOM
-  const create = createDOM();
   create.create();
-  create.loadDOM();
+  // create.loadDOM(); ----------------------------------
   const banner = document.querySelector('.banner');
   const playGame = (choice) => {
     // play user choice
@@ -35,7 +30,8 @@ const main = () => {
       if (!(compBoard.checkAlive())) {
         gameOver = true;
         create.loadDOM();
-        banner.textContent = 'Congratulations, You won';
+        banner.textContent = 'Congratulations, you won';
+        create.again();
       }
     }
 
@@ -51,6 +47,7 @@ const main = () => {
         gameOver = true;
         create.loadDOM();
         banner.textContent = 'Better luck next time, the computer won';
+        create.again();
       }
       changeTurn();
     }
@@ -72,5 +69,3 @@ const main = () => {
     });
   });
 };
-
-export default main;
