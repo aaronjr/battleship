@@ -38,7 +38,8 @@ const Player = () => {
         lastShot.hit = false;
         return computerAttack(board);
         // if missed update lastShot correctly
-      } if (attempt === 'miss') {
+      }
+      if (attempt === 'miss') {
         lastShot.location = guess;
         lastShot.hit = false;
         // if hit update lastShot correctly
@@ -75,7 +76,11 @@ const Player = () => {
     }
   };
 
-  return { computerGuess, computerAttack };
+  // create a function that takes a user input
+  // as with above checks its valid
+  const playerAttack = (location, board) => !!board.recieveHit(location);
+
+  return { computerGuess, computerAttack, playerAttack };
 };
 
 export default Player;

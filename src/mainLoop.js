@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 /* eslint-disable no-alert */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-undef */
@@ -7,14 +8,13 @@ import gameboard from './gameboard';
 import Player from './player';
 import newShip from './ship';
 
-const mainLoop = () => {
+const Practice = () => {
+  let gameOver = false;
+  let turn = 'player';
+  const changeTurn = () => turn = turn === 'player' ? 'computer' : 'player';
   // initialise two players
   const playerOne = Player();
   const computer = Player();
-
-  // initialise to computer, so player goes first
-  let lastGo = 'computer';
-  const changeTurn = () => lastGo = lastGo === 'computer' ? 'playerOne' : 'computer';
 
   // create two boards
   const playerBoard = gameboard();
@@ -76,6 +76,10 @@ const mainLoop = () => {
       box2.setAttribute('who', 'C');
       box2.setAttribute('target', `${start + end}`);
 
+      // box2.addEventListener('click', (box) => {
+      //   playersTurn = box.target.attributes.target.value;
+      // });
+
       boardOne.append(box1);
       boardTwo.append(box2);
     }
@@ -121,49 +125,54 @@ const mainLoop = () => {
     }
   };
 
-  const playGame = () => {
-    // change player from last go
-    changeTurn();
-    const player = lastGo;
-    // update latest board
-    updatePlayerBoardDOM();
-    updateComputerBoardDOM();
-
-    // play computers choice and update accordingly
-    // use recusion to playGame if game not over
-    if (player === 'computer') {
-      if (playerBoard.checkAlive()) {
-        computer.computerAttack(playerBoard);
-        updatePlayerBoardDOM();
-        if ((playerBoard.checkAlive())) {
-          setTimeout(() => { playGame(); }, 500);
-        } else {
-          updatePlayerBoardDOM();
-          console.log('Computer won');
-          return true;
-        }
-      }
-
-      // players go and update accordingly
-      // use recusion to playGame if game not over
-    } else if (player === 'playerOne') {
-      if (compBoard.checkAlive()) {
-        playerOne.computerAttack(compBoard);
+  const playGame = (choice) => {
+    // play user choice
+    // check board still alive
+    if (compBoard.checkAlive()) {
+      // users choice and to which board
+      playerOne.playerAttack(choice, compBoard);
+      updateComputerBoardDOM();
+      changeTurn();
+      // if computer board is finished then return
+      // winner and update board
+      if (!(compBoard.checkAlive())) {
+        gameOver = true;
         updateComputerBoardDOM();
-        if ((compBoard.checkAlive())) {
-          setTimeout(() => { playGame(); }, 500);
-        } else {
-          updateComputerBoardDOM();
-          console.log('playerOne won');
-          return true;
-        }
+        console.log('playerOne won');
       }
     }
-    return true;
+
+    // check user still in play
+    if (playerBoard.checkAlive()) {
+      // play computer guess
+      // will use recusion to find an acceptable shot
+      computer.computerAttack(playerBoard);
+      // setTimeout(updatePlayerBoardDOM, 1500);
+      updatePlayerBoardDOM();
+      changeTurn();
+      // if player board is finished then return
+      // winner and update board
+      if (!(playerBoard.checkAlive())) {
+        gameOver = true;
+        updatePlayerBoardDOM();
+        console.log('Computer won');
+      }
+    }
+    // if either is dead
+    // offer to start again
   };
 
-  // add button for start game
-  return { playGame };
+  updateComputerBoardDOM();
+  updatePlayerBoardDOM();
+
+  const boxes = document.querySelectorAll('[who="C"]');
+  boxes.forEach((box) => {
+    box.addEventListener('click', () => {
+      if (!gameOver && turn === 'player') {
+        playGame(box.attributes.target.value);
+      }
+    });
+  });
 };
 
-export default mainLoop;
+export default Practice;
