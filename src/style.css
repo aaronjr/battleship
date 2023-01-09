@@ -1,8 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Montserrat', sans-serif;
+}
 body{
- display: grid;
- place-items: center;
  width: 100vw;
  height: 100vh;
+ display: flex;
+ flex-direction: column;
+}
+
+.banner{
+  height: 20%;
+  display: grid;
+  place-items: center;
 }
 
 .container{
@@ -14,15 +27,16 @@ body{
 
 .boardOne,
 .boardTwo {
-  height: 490px;
-  width: 490px;
+  aspect-ratio: 1/1;
+  width: 35%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  place-items: center;
 }
 
 .box{
-  height: 60px;
-  width: 60px;
+  aspect-ratio: 1/1;
+  width: 85%;
   border: solid black 1px;
 }
 
