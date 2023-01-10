@@ -15,7 +15,6 @@ export const main = () => {
   const changeTurn = () => turn = turn === 'player' ? 'computer' : 'player';
 
   create.create();
-  // create.loadDOM(); ----------------------------------
   const banner = document.querySelector('.banner');
   const playGame = (choice) => {
     // play user choice
