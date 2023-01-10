@@ -1,1 +1,3 @@
 # battleship
+
+theme:minima
