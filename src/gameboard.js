@@ -9,6 +9,8 @@ const gameboard = () => {
   const board = {};
   // list of ships on board
   const ships = [];
+  // export list of ships
+  const shipList = () => ships;
 
   // loop through and create 7 x 7 board - a0, a1 ... g6
   // set keys and their values
@@ -99,6 +101,7 @@ const gameboard = () => {
     printBoard,
     recieveHit,
     checkAlive,
+    shipList,
   };
 };
 

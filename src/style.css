@@ -38,16 +38,24 @@ body{
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   place-items: center;
+  position: relative;
 }
-
+.boardOne::after{
+  content: 'Your ships';
+  position: absolute;
+  bottom:-17px;
+  left: 1%;
+}
+.boardTwo::after{
+  content: 'Attack here';
+  position: absolute;
+  bottom:-17px;
+  left: 1%;
+}
 .box{
   aspect-ratio: 1/1;
   width: 85%;
   border: solid black 1px;
-}
-
-.colour{
-  background-color: blcak;
 }
 
 .start,
@@ -63,5 +71,31 @@ body{
 .shipHolder{
   height: calc( (100vw / 100 * 30) - 4px );
   width: 10%;
-  border: solid 1px black;
+  display: grid;
+  grid-template-rows: 40% repeat(5, 1fr);
+}
+
+.top{
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 30%;
+  text-align: center;
+  color: black;
+}
+.ship{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0px 10px;
+}
+
+.part{
+  width:100%;
+  aspect-ratio: 1/1;
+  background-color: red;
+}
+
+.ship:last-child{
+  margin-bottom: 25%;
 }

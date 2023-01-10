@@ -29,7 +29,6 @@ export const main = () => {
       // winner and update board
       if (!(compBoard.checkAlive())) {
         gameOver = true;
-        create.loadDOM();
         banner.textContent = 'Congratulations, you won';
         create.again();
       }
@@ -45,7 +44,6 @@ export const main = () => {
       // winner and update board
       if (!(playerBoard.checkAlive())) {
         gameOver = true;
-        create.loadDOM();
         banner.textContent = 'Better luck next time, the computer won';
         create.again();
       }

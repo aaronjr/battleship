@@ -1,8 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
 
+import { updateSide } from './shipHolder';
 import updateComputerBoardDOM from './updateComputerBoardDOM';
 import updatePlayerBoardDOM from './updatePlayerBoardDOM';
+// import fillSide from './shipHolder';
 
 const createDOM = () => {
   const create = () => {
@@ -62,11 +64,13 @@ const createDOM = () => {
     container.append(boardTwo);
     container.append(ships);
   };
-
+  let counter = 0;
   const loadDOM = () => {
     // load loaded board to screen
     updateComputerBoardDOM();
     updatePlayerBoardDOM();
+    if (counter !== 0) { updateSide(); }
+    counter += 1;
   };
 
   const again = () => {
@@ -84,3 +88,8 @@ const createDOM = () => {
 };
 
 export default createDOM;
+
+// get all ships
+// ships .length for length
+// ships .hitcount for color
+// call updayed within loadDOM
