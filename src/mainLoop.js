@@ -29,7 +29,7 @@ export const main = () => {
       // winner and update board
       if (!(compBoard.checkAlive())) {
         gameOver = true;
-        banner.textContent = 'Congratulations, you won';
+        banner.textContent = 'Congratulations, you won.';
         create.again();
       }
     }
@@ -44,7 +44,7 @@ export const main = () => {
       // winner and update board
       if (!(playerBoard.checkAlive())) {
         gameOver = true;
-        banner.textContent = 'Better luck next time, the computer won';
+        banner.textContent = 'Better luck next time, the computer won.';
         create.again();
       }
       changeTurn();

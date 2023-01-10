@@ -5,7 +5,6 @@ import { updateSide } from './shipHolder';
 import updateComputerBoardDOM from './updateComputerBoardDOM';
 import updatePlayerBoardDOM from './updatePlayerBoardDOM';
 import logo from './logo.png';
-// import fillSide from './shipHolder';
 
 const createDOM = () => {
   const create = () => {
