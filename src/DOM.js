@@ -4,6 +4,7 @@
 import { updateSide } from './shipHolder';
 import updateComputerBoardDOM from './updateComputerBoardDOM';
 import updatePlayerBoardDOM from './updatePlayerBoardDOM';
+import logo from './logo.png';
 // import fillSide from './shipHolder';
 
 const createDOM = () => {
@@ -34,6 +35,18 @@ const createDOM = () => {
     const boardTwo = document.createElement('div');
     boardOne.className = 'boardOne';
     boardTwo.className = 'boardTwo';
+
+    // image of logo
+    const img = document.createElement('img');
+    img.src = logo;
+    img.className += 'one';
+    body.append(img);
+
+    // image of logo
+    const imgTwo = document.createElement('img');
+    imgTwo.src = logo;
+    imgTwo.className += 'two';
+    body.append(imgTwo);
 
     // loop through and create 7 x 7 board - a0, a1 ... g6
     // create boxes for each board with different names

@@ -10,6 +10,7 @@ body{
  height: 100vh;
  display: flex;
  flex-direction: column;
+
 }
 
 .banner{
@@ -98,4 +99,19 @@ body{
 
 .ship:last-child{
   margin-bottom: 25%;
+}
+
+.one{
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 20%;
+}
+
+.two{
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  width: 20%;
+  transform: rotate(180deg);
 }
