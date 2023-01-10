@@ -94,7 +94,7 @@ body{
 .part{
   width:100%;
   aspect-ratio: 1/1;
-  background-color: red;
+  background-color: black;
 }
 
 .ship:last-child{

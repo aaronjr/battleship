@@ -24,9 +24,6 @@ export const fillSide = () => {
     for (let i = 0; i < length; i += 1) {
       const box = document.createElement('div');
       box.className = 'part';
-      if (i > 0 && i <= hits) {
-        box.style.backgroundColor = 'green';
-      }
       div.append(box);
     }
     holder.append(div);
@@ -38,6 +35,6 @@ export const updateSide = () => {
   ships.forEach((ship, index) => {
     const hits = ship.hitCount() - 1;
     const children = [...document.querySelector(`[ship="${index}"]`).children];
-    children.forEach((child, i) => { if (i <= hits) { child.style.backgroundColor = 'green'; } });
+    children.forEach((child, i) => { if (i <= hits) { child.style.backgroundColor = 'red'; } });
   });
 };
