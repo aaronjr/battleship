@@ -17,7 +17,6 @@ export const fillSide = () => {
 
   ships.forEach((ship, index) => {
     const length = ship.getLength();
-    const hits = ship.hitCount();
     const div = document.createElement('div');
     div.className += 'ship';
     div.setAttribute('ship', index);
