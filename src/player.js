@@ -26,7 +26,6 @@ const Player = () => {
 
   // computer can make a random guess or side shot if last was succesful
   const computerAttack = (board) => {
-    console.log(lastShot);
     // if last shot was wrong, make new guess
     if (lastShot.hit === false) {
       // create new guess for computer
