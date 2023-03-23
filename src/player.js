@@ -16,7 +16,7 @@ const Player = () => {
     return `${letter[firstNumber]}${secondNumber}`;
   };
 
-  // get random coords 
+  // get random coords
   const computerGuess = () => {
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
     const { length } = letters;
